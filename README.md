@@ -7,5 +7,6 @@
     - [Асинхронные операции. Пример использование Future](src/main/scala/FutureEasy2.scala)
 
 - Дополнительно
+    - [Следующая лекция: Scala в картинках](https://github.com/salamandraa/ScalaInPictures)
     - [Проблемы](https://www.xmind.net/m/T4PFT4/)
     
