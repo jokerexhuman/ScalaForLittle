@@ -11,16 +11,22 @@ object Beginning1 {
     println("Apple")
 
     //class - это чертеж, по чертежу можно сделать экземпляр класса
+
     // class Apple - это чертеж яблока, по этому чертежу можно сделать яблоко!(вот это поворот картинка )
+
+
     case class Apple(color: String, size: Int)
 
-    val apple1: Apple = Apple("green", 2) //Создали первое яблоко
+    val apple1 = Apple("green", 2) //Создали первое яблоко
 
+    val apple2 = Apple("green", 3)
     // тип на самом деле не обязательно указывать, мы будем указывать для лучшего понимания
-    val apple2 = Apple("red", 3) //Создали второе яблоко
+    val apple3 = Apple("red", 3) //Создали второе яблоко
 
-    println(apple1) //Распечатали первое яблоко
-    println(apple2) //Распечатали второе яблоко
+
+    println(apple1) //Распечатали 1 яблоко
+    println(apple2)
+    println(apple3) //Распечатали 3 яблоко
 
     // Что такое ящик?
     println()
@@ -28,10 +34,15 @@ object Beginning1 {
 
     //Список - это класс который хранит несколько элементов одного типа
     //Допустим, что ящик это список
-    val listEmpty: List[Nothing] = List() // создали пустой список
-    val listInt: List[Int] = List(1, 2, 10) //создали список чисел
-    val listString: List[String] = List("Hello", "world") //создали список строк
-    val listApple: List[Apple] = List(Apple("green", 2), Apple("red", 3)) //создали список яблок
+
+
+    val listEmpty = List() // создали пустой список
+
+    val listInt = List(1, 2, 10) //создали список чисел
+
+    val listString = List("Hello", "world") //создали список строк
+
+    val listApple = List(Apple("green", 2), Apple("red", 3)) //создали список яблок
 
 
     println(listEmpty)
@@ -50,34 +61,47 @@ object Beginning1 {
     //Что нам еще может пригодиться?
 
     //Класс GlassOfJuice хранит обьем сока
+
+
     case class GlassOfJuice(volume: Int)
 
     // соковыжималка
-    case class Juicer() {
 
-      // squeezeTheJuice - метод класса, действие которое можно сделать с соковыжималкой
-      //  помещяем яблоко в соковыжималку и получаем сок по формуле
+
+    case class Juicer() {
       def squeezeTheJuice(apple: Apple): GlassOfJuice = GlassOfJuice(apple.size * 100)
     }
+
+    // squeezeTheJuice - метод класса, действие которое можно сделать с соковыжималкой
+    //  помещяем яблоко в соковыжималку и получаем сок по формуле
 
     println()
     println("Squeeze The GlassOfJuice")
     //Как из одного яблока получить 1 порцию сока?
 
     val oneApple: Apple = Apple("green", 2)
+
     val juicer: Juicer = Juicer()
+
     val onePortionJuice: GlassOfJuice = juicer.squeezeTheJuice(oneApple)
+
 
     println(oneApple)
     println(onePortionJuice)
 
     //Как из списка яблока получить список порций сока?
 
+
     val apples: List[Apple] = List(Apple("green", 2), Apple("red", 3), Apple("red", 2), Apple("green", 1))
+
+
     //    val juicer = Juicer()
     // У List есть метод map, которому нужно сказать как преобразовать 1 элемент списка (передать функцию)
     // Мы говорим, что хотим получить из одного яблока один сок, и это применяется для каждого элемента
+
+
     val cupsOfJuice: List[GlassOfJuice] = apples.map(apple => juicer.squeezeTheJuice(apple))
+
 
     println(apples)
     println(cupsOfJuice)
@@ -86,6 +110,7 @@ object Beginning1 {
     println("Union GlassOfJuice")
     //Как объединить все порции сока?
     // У List есть метод reduce, которому нужно сказать как обьединить 2 элемента списка в 1 элемент (передать функцию)
+
     val allJuice: GlassOfJuice = cupsOfJuice.reduce((juiceL, juiceR) => GlassOfJuice(juiceL.volume + juiceR.volume))
 
     println(cupsOfJuice)
@@ -99,9 +124,11 @@ object Beginning1 {
     println()
     println("Rotten apple")
     // Apple("grey", 3)- испорченное яблоко
+
     val applesWithRotten: List[Apple] = List(Apple("green", 2), Apple("grey", 3), Apple("red", 2))
 
     // У List есть метод filter, которому нужно сказать  элемент списка подходит или нет (передать функцию)
+
     val applesGood: List[Apple] = applesWithRotten.filter(apple => apple.color != "grey")
 
     println(applesWithRotten)
@@ -116,6 +143,7 @@ object Beginning1 {
     val applesNested1: List[List[Apple]] = List(List(Apple("green", 2), Apple("grey", 3), Apple("red", 2)))
 
     // Убирает 1 вложенность, в данном случае List
+
     val apples1: List[Apple] = applesNested1.flatten
 
     println(applesNested1)
@@ -129,7 +157,7 @@ object Beginning1 {
     println(apples2)
 
     println()
-    println("Flatten + Map = FlatMap")
+    println("   Flatten + Map = FlatMap       ")
 
     println()
     println("Suprise")
@@ -169,30 +197,31 @@ object Beginning1 {
       if (list.isEmpty) 0
       else if (list.size == 1) list.head
       else
-      // последняя операция - сумма сначала нужно найти list.head и sumNotTailRecursion(list.tail), потом их сложить
+      // последняя операция - сумма, сначала нужно
+      // найти list.head и sumNotTailRecursion(list.tail), затем их сложить
         list.head + sumNotTailRecursion(list.tail)
     }
 
-    @tailrec
+    @tailrec // аннотация - явно говорит коспилятору, что нужно использовать хвостовую рекурсию
     def sumTailRecursion(list: List[Int], sumAccumulator: Int): Int = {
       if (list.isEmpty) {
         sumAccumulator
       } else {
         //Список = голова списка (один элемент) + хвост списка
         val sumNow: Int = list.head + sumAccumulator //голова списка + общая сумма
-        // последняя операция - вызов функции sumRecursion(tail, sumNow), из за этого это хвостовая рекурсия
-        // хвостовая рекурсия под "капотом" разворачивается в цикл
+        // последняя операция - вызов функции sumRecursion(tail, sumNow),
+        // из за этого это хвостовая рекурсия под "капотом" разворачивается в цикл
         sumTailRecursion(list.tail, sumNow) //list.tail - хвост списка
       }
     }
 
     val listNumber: List[Int] = List(1, 2, 4, 5)
 
-    val sum1: Int = listNumber.reduce((x, y) => x + y)
+    val sum1: Int = listNumber.reduce((x, y) => x + y) // 12
 
-    val sum2: Int = sumNotTailRecursion(listNumber)
+    val sum2: Int = sumNotTailRecursion(listNumber) // 12
 
-    val sum3: Int = sumTailRecursion(listNumber, 0)
+    val sum3: Int = sumTailRecursion(listNumber, 0) // 12
 
     println(listNumber)
     println(sum1)
@@ -208,7 +237,9 @@ object Beginning1 {
     val volumeJuicePacking: Int = 500
 
     @tailrec
-    def getJuicePacks(cupsOfJuice: List[GlassOfJuice], restVolumeJuice: Int, juicePackAccumulator: List[JuicePack]): List[JuicePack] = {
+    def getJuicePacks(cupsOfJuice: List[GlassOfJuice],
+                      restVolumeJuice: Int,
+                      juicePackAccumulator: List[JuicePack]): List[JuicePack] = {
       // алгоритм максимально упрощенный, поэтому не на всех примерах он будет правильно работать
       if (cupsOfJuice.isEmpty) {
         juicePackAccumulator
@@ -223,7 +254,6 @@ object Beginning1 {
         }
       }
       // алгоритм максимально упрощенный, поэтому не на всех примерах он будет правильно работать
-
     }
 
     val glassesOfJuice: List[GlassOfJuice] = List(100, 300, 200, 400, 450, 50).map(volume => GlassOfJuice(volume))

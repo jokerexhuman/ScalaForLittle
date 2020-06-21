@@ -1,4 +1,4 @@
-# Scala в картинках
+# Scala для начинающих
 - Презентация
     - [pdf](scalaInPictures1.0.pdf)
     - [pptx](scalaInPictures1.0.pptx)  
