@@ -8,6 +8,6 @@
 
 - Дополнительно
     - [Следующая лекция: Scala в картинках](https://github.com/salamandraa/ScalaInPictures)
-    - https://t.me/jockerexhuman
+    - https://t.me/jokerexhuman
     - [Проблемы](https://www.xmind.net/m/T4PFT4/)
     
